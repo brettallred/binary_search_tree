@@ -42,5 +42,37 @@ func TestTreeInsert(t *testing.T) {
 
 	tree.Insert(13)
 	assert.Equal(tree.Root.Children[1].Children[1].Children[0].IntValue, 13)
+}
 
+func TestTreeSearchValuesThatExist(t *testing.T) {
+	tree := &binary_search_tree.Tree{}
+	assert := assert.New(t)
+	assert.Nil(tree.Root)
+
+	tree.Insert(8)
+	node := tree.Search(8)
+	assert.Equal(node.IntValue, 8)
+
+	tree.Insert(3)
+	node = tree.Search(3)
+	assert.Equal(node.IntValue, 3)
+}
+
+func TestTreeSearchValuesThatDoNotExist(t *testing.T) {
+	tree := &binary_search_tree.Tree{}
+	tree.Insert(10)
+
+	node := tree.Search(8)
+
+	assert := assert.New(t)
+	assert.Nil(node)
+}
+
+func TestTreeSearchWithNilRootNode(t *testing.T) {
+	tree := &binary_search_tree.Tree{}
+
+	node := tree.Search(8)
+
+	assert := assert.New(t)
+	assert.Nil(node)
 }
